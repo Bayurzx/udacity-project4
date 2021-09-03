@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Variables
-resourceGroup="acdnd-c4-project"
-location="westus"
+resourceGroup="deletenow"
+location="eastus"
 osType="UbuntuLTS"
-vmssName="udacity-vmss"
-adminName="udacityadmin"
-storageAccount="udacitydiag$RANDOM"
+vmssName="bayurzx-vmss"
+adminName="bayurzx"
+storageAccount="bayurzxdiag$RANDOM"
 bePoolName="$vmssName-bepool"
 lbName="$vmssName-lb"
 lbRule="$lbName-network-rule"
@@ -21,12 +21,15 @@ storageType="Standard_LRS"
 # This command will not work for the Cloud Lab users. 
 # Cloud Lab users can comment this command and 
 # use the existing Resource group name, such as, resourceGroup="cloud-demo-153430" 
-echo "STEP 0 - Creating resource group $resourceGroup..."
+# echo "STEP 0 - Creating resource group $resourceGroup..."
+echo "STEP 0 - Already got a resource group: $resourceGroup..."
 
-az group create \
---name $resourceGroup \
---location $location \
---verbose
+# az group create \
+# --name $resourceGroup \
+# --location $location \
+# --verbose
+
+az group show -n deletenow
 
 echo "Resource group created: $resourceGroup"
 
