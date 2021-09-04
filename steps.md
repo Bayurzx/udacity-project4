@@ -176,4 +176,40 @@ watch az vmss list-instances \
 
 - When complete, enable manual scale.
 
-# We will continue with AKS in another branch called `Deploy_to_AKS`
+# Create an Azure RunBook to be executed by an Azure Automation Account.
+- Create a RunBook with some powershell scripts
+  
+``` powershell
+# define parameters
+$mySubscriptionId = "8064143e-2180-4b36-89ab-484cbf066722"
+$myResourceGroup = "deletenow"
+$myScaleSet = "bayurzx-vmss"
+$myLocation = "East US"
+
+# create a scale out rule
+$myRuleScaleOut = New-AzureRmAutoscaleRule `
+  -MetricName "Percentage CPU" `
+  -MetricResourceId /subscriptions/$mySubscriptionId/resourceGroups/$myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/$myScaleSet `
+  -TimeGrain 00:01:00 `
+  -MetricStatistic "Average" `
+  -TimeWindow 00:05:00 `
+  -Operator "GreaterThan" `
+  -Threshold 70 `
+  -ScaleActionDirection "Increase" `
+  -ScaleActionScaleType "ChangeCount" `
+  -ScaleActionValue 3 `
+  -ScaleActionCooldown 00:05:00
+
+```
+- Configure an Azure Alert to trigger the RunBook to execute.
+  - Create a new alert
+  - Select notification type
+  - Create an action group
+    - Remember to set action type of Automation Runbook and use a user defined `Runbook SOurce`
+  - Create
+
+- Cause the RunBook to be automatically triggered and resolve a problem.
+  - Simply follow the *Generate CPU load on scale set* section
+
+
+# We will continue with `AKS` in another branch called `Deploy_to_AKS`
