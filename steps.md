@@ -327,6 +327,8 @@ workflow Scale-out-VMSS
     -ScaleActionCooldown 00:05:00
 }
 ```
+>Check out [powershell-sample-enable-autoscale](https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/scripts/powershell-sample-enable-autoscale)
+
 - Causes the RunBook to be automatically triggered and resolve a problem.
   - Simply follow the *Generate CPU load on scale set* section
 
