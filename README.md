@@ -37,7 +37,7 @@ In this project, you'll be tasked to do the following:
 ---
 
 <details>
-  <summary><h2>Part 1. Getting Started </h2></summary>
+  <summary><h2>👆🏼 Part 1. Getting Started </h2></summary>
 
 1. Prerequisites
    - [Azure Account](https://azure.microsoft.com/en-us/free/)
@@ -63,7 +63,7 @@ In this project, you'll be tasked to do the following:
 ---
 
 <details>
-  <summary><h2>Part 2. Local Environment Setup (Optional) </h2></summary>
+  <summary><h2>👆🏼 Part 2. Local Environment Setup (Optional) </h2></summary>
 
 If you want to run the application on localhost, follow the steps below; otherwise, you can skip to the **Azure Environment Setup** section next. 
 
@@ -118,7 +118,7 @@ If you want to run the application on localhost, follow the steps below; otherwi
 ---
 
 <details>
-  <summary><h2>Part 3. Project Instructions - Azure Environment Setup </h2></summary>
+  <summary><h2>👆🏼 Part 3. Project Instructions - Azure Environment Setup </h2></summary>
 
 ### Step 1. Create an Azure VMSS 
 1. A bash script `setup-script.sh` has been provided to automate the creation of the VMSS. You should not need to modify this script.
@@ -457,7 +457,7 @@ The script above will take a few minutes to create VMSS and related resources. O
 --- 
 
 <details>
-  <summary><h3>Built With </h3></summary>
+  <summary><h3>👆🏼 Built With </h3></summary>
 
 * Open-source 3rd-party: [Azure Voting App](https://github.com/Azure-Samples/azure-voting-app-redis)
 
