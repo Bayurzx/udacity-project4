@@ -40,7 +40,7 @@ A bash script setup-script.sh has been provided to automate the creation of the 
 The script above will take a few minutes to create VMSS and related resources
 
 ## Application Insights & Log Analytics
-- Create an Application Insights resource. It will automatically create a Log Analytics workspace in addition.
+- Create an Application Insights resource from [Azure Portal](https://portal.azure.com/#create/Microsoft.AppInsights). It will automatically create a Log Analytics workspace in addition.
 
 - Enable Application Insights monitoring for the VM Scale Set. Make sure to choose the same Log Analytics workspace that you've created in the step above. The Insights deployment will take 10-15 minutes.
 
@@ -176,41 +176,7 @@ watch az vmss list-instances \
 
 - When complete, enable manual scale.
 
-# Create an Azure RunBook to be executed by an Azure Automation Account.
-- Create a RunBook with some powershell scripts
-  
-``` powershell
-# define parameters
-$mySubscriptionId = "8064143e-2180-4b36-89ab-484cbf066722"
-$myResourceGroup = "deletenow"
-$myScaleSet = "bayurzx-vmss"
-$myLocation = "East US"
-
-# create a scale out rule
-$myRuleScaleOut = New-AzureRmAutoscaleRule `
-  -MetricName "Percentage CPU" `
-  -MetricResourceId /subscriptions/$mySubscriptionId/resourceGroups/$myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/$myScaleSet `
-  -TimeGrain 00:01:00 `
-  -MetricStatistic "Average" `
-  -TimeWindow 00:05:00 `
-  -Operator "GreaterThan" `
-  -Threshold 70 `
-  -ScaleActionDirection "Increase" `
-  -ScaleActionScaleType "ChangeCount" `
-  -ScaleActionValue 3 `
-  -ScaleActionCooldown 00:05:00
-
-```
-- Configure an Azure Alert to trigger the RunBook to execute.
-  - Create a new alert
-  - Select notification type
-  - Create an action group
-    - Remember to set action type of Automation Runbook and use a user defined `Runbook SOurce`
-  - Create
-
-- Cause the RunBook to be automatically triggered and resolve a problem.
-  - Simply follow the *Generate CPU load on scale set* section
-
+---
 
 # We will continue with `AKS` in another branch called `Deploy_to_AKS`
 - Checkout to a new branch
@@ -302,7 +268,7 @@ kubectl autoscale deployment azure-vote-front --cpu-percent=70 --min=1 --max=4
 - Cause load on the system. After approximately 10 minutes, stop the load.
 
 >``` bash
-># This didn't cause that much load
+># This didn't cause that much load, so ignore!!! 
 >for ((i=1;i<=100;i++)); do   curl -v --header "Connection: keep-alive" "20.185.72.112"; done
 >```
   - we create a new deployment with a yaml file called [infinity-call.yaml](https://github.com/Bayurzx/udacity-project4/blob/master/infinity-call.yaml)
@@ -320,6 +286,32 @@ kubectl autoscale deployment azure-vote-front --cpu-percent=70 --min=1 --max=4
 - Create an Azure Automation Account
 
 - Create a Runbook (Python or Powershell)—either using a script or the UI—that will remedy a problem. It's your choice to mark any event as a "problem", such as average CPU% or memory utlliization crossing a certain threshold is a problem. In this case, think creatively, what you would like the Runbook to do after the average CPU% utlliization of the VMSS crosses a certain threshold. There are numerous options to choose from - vertical/horizontal scale the VMSS, start an existing VM, or any other remedy you choose.
+  - Create a RunBook with some powershell scripts
+  
+``` powershell
+# define parameters
+$mySubscriptionId = "8064143e-2180-4b36-89ab-484cbf066722"
+$myResourceGroup = "deletenow"
+$myScaleSet = "bayurzx-vmss"
+$myLocation = "East US"
+
+# create a scale out rule
+$myRuleScaleOut = New-AzureRmAutoscaleRule `
+  -MetricName "Percentage CPU" `
+  -MetricResourceId /subscriptions/$mySubscriptionId/resourceGroups/$myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/$myScaleSet `
+  -TimeGrain 00:01:00 `
+  -MetricStatistic "Average" `
+  -TimeWindow 00:05:00 `
+  -Operator "GreaterThan" `
+  -Threshold 70 `
+  -ScaleActionDirection "Increase" `
+  -ScaleActionScaleType "ChangeCount" `
+  -ScaleActionValue 3 `
+  -ScaleActionCooldown 00:05:00
+
+```
+- Cause the RunBook to be automatically triggered and resolve a problem.
+  - Simply follow the *Generate CPU load on scale set* section
 
 - In Azure automation, create an alert rule. An alert rule has the following components:
 
