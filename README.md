@@ -361,6 +361,18 @@ The script above will take a few minutes to create VMSS and related resources. O
 </details>
 
 ---
+<!-- ![1.1_Log_Analytics_Workspace_Insights.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/1.1_Log_Analytics_Workspace_Insights.jpg)
+![1.3_Application_Insights_AKS_cluster.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/1.3_Application_Insights_AKS_cluster.jpg)
+![1.4_Azure_AKS_Alert.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/1.4_Azure_AKS_Alert.jpg)
+![1.4_Azure_AKS_Alert2.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/1.4_Azure_AKS_Alert2.jpg)
+![1.5_horizontal_pod_autoscaler1.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/1.5_horizontal_pod_autoscaler1.jpg)
+![3.1_autoscale_manual.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/3.1_autoscale_manual.jpg)
+![3.1_autoscale1.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/3.1_autoscale1.jpg)
+![4.1_Automation_Account_RunBook.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/4.1_Automation_Account_RunBook.jpg)
+![4.2_Runbook_Alert.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/4.2_Runbook_Alert.jpg)
+![4.3_Runbook_Triggered2_1.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/4.3_Runbook_Triggered2_1.jpg) -->
+
+---
 
 # Part 4 - Submissions
 
@@ -370,36 +382,83 @@ The script above will take a few minutes to create VMSS and related resources. O
 2. Screenshots for the kubernetes cluster which include:
    **Note**: Place all screenshots for Kubernetes Cluster in the `submission-screenshots/kubernetes-cluster` directory
    - The output of the Horizontal Pod Autoscaler, showing an increase in the number of pods.
+
+![1.5_horizontal_pod_autoscaler1_1.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/1.5_horizontal_pod_autoscaler1_1.jpg)
+
    - The Application Insights metrics which show the increase in the number of pods.
+   
+![1.5_App_Insights_metrics.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/1.5_App_Insights_metrics.jpg)
+
    - The email you received from the alert when the pod count increased.
 
+![1.5_Monitor_Alert_Pod_Incr.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/1.5_Monitor_Alert_Pod_Incr.jpg)
 
 3. Screenshots for the Application Insights which include:
    **Note**: Place all screenshots for Application Insights in the `submission-screenshots/application-insights` directory
    - The metrics from the VM Scale Set instance--this will show CPU %, Available Memory %, Information about the Disk, and information about the bytes sent and received. There will be 5 graphs which display this data.
+
+![1.2_VMSS_CPU_MEM_Byte.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/1.2_VMSS_CPU_MEM_Byte.jpg)
+![1.2_VMSS_CPU_MEM_Byte2.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/1.2_VMSS_CPU_MEM_Byte2.jpg)
+![1.2_VMSS_CPU_MEM_Byte3.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/1.2_VMSS_CPU_MEM_Byte3.jpg)
+
    - Application Insight Events which show the results of clicking 'vote' for each 'Dogs' & 'Cats'
+
+![2.2_events.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/2.2_events.jpg)
+
    - The output of the `traces` query in Azure Log Analytics.
+
+![2.2_events2.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/2.2_events2.jpg)
+
    - The chart created from the output of the `traces` query.
 
+![2.2_events3.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/2.2_events3.jpg)
 
-4. Screenshots for the Autoscaling of the VM Scale Set which include:
+1. Screenshots for the Autoscaling of the VM Scale Set which include:
    **Note**: Place all screenshots for Autoscaling VMSS in the `submission-screenshots/autoscaling-vmss` directory
    - The conditions for which autoscaling will be triggered (found in the 'Scaling' item in the VM Scale Set).
+
+![3.1_autoscale.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/3.1_autoscale.jpg)
+
    - The Activity log of the VM scale set which shows that it scaled up with timestamp.
+
+![3.2_Activity_Log_VMSS.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/3.2_Activity_Log_VMSS.jpg)
+![3.2_Activity_Log_VMSS2.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/3.2_Activity_Log_VMSS2.jpg)
+
    - The new instances being created.
+
+![3.2_new_instances.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/3.2_new_instances.jpg)
+![3.2_new_instances2.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/3.2_new_instances2.jpg)
+
    - The metrics which show the load increasing, then decreasing once scaled up with timestamp.
 
+![3.2_autoscale_metric.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/3.2_autoscale_metric.jpg)
 
-5. Screenshots for the Azure Runbook which include:
+2. Screenshots for the Azure Runbook which include:
    **Note**: Place all screenshots for RunBook in the `submission-screenshots/runbook` directory
    - The alert configuration in Azure Monitor which shows the resource, condition, action group (this should include a reference to your Runbook), and alert rule details (may need 2 screenshots).
+
+![4.2_Runbook_Alert1.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/4.2_Runbook_Alert1.jpg)
+![4.2_Runbook_Alert2.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/4.2_Runbook_Alert2.jpg)
+![4.2_Runbook_Alert3.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/4.2_Runbook_Alert3.jpg)
+
    - The email you received from the alert when the Runbook was executed.
+
+![4.3_Runbook_Triggered1.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/4.3_Runbook_Triggered1.jpg)
+
+![4.3_Runbook_Triggered2.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/4.3_Runbook_Triggered2.jpg)
+
    - The summary of the alert which shows 'why did this alert fire?', timestamps, and the criterion in which it fired.
 
+![4.2_Runbook_Alert1.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/4.2_Runbook_Alert1.jpg)
+
 --- 
-### Built With
+
+<details>
+  <summary><h3>Built With </h3></summary>
 
 * Open-source 3rd-party: [Azure Voting App](https://github.com/Azure-Samples/azure-voting-app-redis)
 
 * [License](./LICENSE.md)
       THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+</details>
