@@ -33,7 +33,8 @@ In this project, you'll be tasked to do the following:
 ```
 
 
-# Part 1. Getting Started
+<details>
+  <summary><h2>Part 1. Getting Started </h2></summary>
 
 1. Prerequisites
    - [Azure Account](https://azure.microsoft.com/en-us/free/)
@@ -54,9 +55,12 @@ In this project, you'll be tasked to do the following:
       ```
    All these packages above are also mentioned in the *requirements.txt* that you can use during the **Local Environment Setup**. 
 
+</details>
+
 ---
 
-# Part 2. Local Environment Setup (Optional)
+<details>
+  <summary><h2>Part 2. Local Environment Setup (Optional) </h2></summary>
 
 If you want to run the application on localhost, follow the steps below; otherwise, you can skip to the **Azure Environment Setup** section next. 
 
@@ -106,9 +110,12 @@ If you want to run the application on localhost, follow the steps below; otherwi
       >app.run(host='0.0.0.0', threaded=True, debug=True)
       >```
 
+</details>
+
 ---
 
-# Part 3. Project Instructions - Azure Environment Setup
+<details>
+  <summary><h2>Part 3. Project Instructions - Azure Environment Setup </h2></summary>
 
 ### Step 1. Create an Azure VMSS 
 1. A bash script `setup-script.sh` has been provided to automate the creation of the VMSS. You should not need to modify this script.
@@ -350,6 +357,8 @@ The script above will take a few minutes to create VMSS and related resources. O
 4. Cause the problem to the flask app on the VM Scale Set.
 
 5. Verify the problem is remedied via the Runbook.
+
+</details>
 
 ---
 
