@@ -31,7 +31,10 @@ In this project, you'll be tasked to do the following:
     ├── kubernetes-cluster
     └── runbook
 ```
+---
 
+# Before you start!!! 🚀🚀🚀 Checkout [my steps](./steps.md) ✨🎉
+---
 
 <details>
   <summary><h2>Part 1. Getting Started </h2></summary>
