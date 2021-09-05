@@ -289,28 +289,45 @@ kubectl autoscale deployment azure-vote-front --cpu-percent=70 --min=1 --max=4
   - Create a RunBook with some powershell scripts
   
 ``` powershell
-# define parameters
-$mySubscriptionId = "8064143e-2180-4b36-89ab-484cbf066722"
-$myResourceGroup = "deletenow"
-$myScaleSet = "bayurzx-vmss"
-$myLocation = "East US"
+workflow Scale-out-VMSS
+{
+  Param
+  (   
+    [Parameter(Mandatory=$true)]
+    [String]
+    $mySubscriptionId,
+    [Parameter(Mandatory=$true)]
+    [String]
+    $myResourceGroup,
+    [Parameter(Mandatory=$true)]
+    [String]
+    $myScaleSet,
+    [Parameter(Mandatory=$true)]
+    [String]
+    $myLocation,
+  )
+  # define parameters
+  # $mySubscriptionId = "8064143e-2180-4b36-89ab-484cbf066722"
+  # $myResourceGroup = "deletenow"
+  # $myScaleSet = "bayurzx-vmss"
+  # $myLocation = "East US"
 
-# create a scale out rule
-$myRuleScaleOut = New-AzureRmAutoscaleRule `
-  -MetricName "Percentage CPU" `
-  -MetricResourceId /subscriptions/$mySubscriptionId/resourceGroups/$myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/$myScaleSet `
-  -TimeGrain 00:01:00 `
-  -MetricStatistic "Average" `
-  -TimeWindow 00:05:00 `
-  -Operator "GreaterThan" `
-  -Threshold 70 `
-  -ScaleActionDirection "Increase" `
-  -ScaleActionScaleType "ChangeCount" `
-  -ScaleActionValue 3 `
-  -ScaleActionCooldown 00:05:00
-
+  # create a scale out rule
+  $myRuleScaleOut = New-AzureRmAutoscaleRule `
+    -MetricName "Percentage CPU" `
+    -MetricResourceId /subscriptions/$mySubscriptionId/resourceGroups/$myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/$myScaleSet `
+    -TimeGrain 00:01:00 `
+    -MetricStatistic "Average" `
+    -TimeWindow 00:05:00 `
+    -Operator "GreaterThan" `
+    -Threshold 70 `
+    -ScaleActionDirection "Increase" `
+    -ScaleActionScaleType "ChangeCount" `
+    -ScaleActionValue 3 `
+    -ScaleActionCooldown 00:05:00
+}
 ```
-- Cause the RunBook to be automatically triggered and resolve a problem.
+- Causes the RunBook to be automatically triggered and resolve a problem.
   - Simply follow the *Generate CPU load on scale set* section
 
 - In Azure automation, create an alert rule. An alert rule has the following components:
