@@ -213,3 +213,120 @@ $myRuleScaleOut = New-AzureRmAutoscaleRule `
 
 
 # We will continue with `AKS` in another branch called `Deploy_to_AKS`
+- Checkout to a new branch
+`git checkout -b Deploy_to_AKS`
+
+- Run `docker-compose up -d --build` to build your new image
+  - MAke sure you are in `docker-compose.yaml` directory
+  - You can also run `docker system prune -a --volumes` to clear all unwanted images not in use
+- View the app locally at `http://localhost:8080/`
+- Stop the application
+`docker-compose down`
+- Check if the frontend application is up and running 
+``` bash
+docker exec -it azure-vote-front bash
+ls
+```
+- Check if the Redis server is running
+``` bash
+docker exec -it azure-vote-back bash
+redis-cli ping # returns pong
+```
+
+- Create the AKS cluster
+``` bash
+   # In your terminal run the following
+   az login
+   # this to make sure its executable
+   chmod +x create-cluster.sh
+   # The script below will create an AKS cluster, Configure kubectl to connect to your Kubernetes cluster, and Verify the connection to your cluster
+   ./create-cluster.sh
+```
+> *Make sure to edit the `create-cluster.sh` for non-cloud-lab* 
+> Link to cluster is [here](https://github.com/Bayurzx/udacity-project4/blob/master/create-cluster.sh)
+
+# create a Container Registry in Azure to store the image, and AKS can later pull them during deployment to the AKS cluster. Feel free to change the ACR name in place of myacr202109 below.
+``` bash
+   # Assuming the deletenow resource group is still available with you
+   # ACR name should not have upper case letter
+   az acr create --resource-group deletenow --name myacr202109 --sku Basic
+   # Log in to the ACR
+   az acr login --name myacr202109
+   # Get the ACR login server name
+   # To use the azure-vote-front container image with ACR, the image needs to be tagged with the login server address of your registry. 
+   # Find the login server address of your registry
+   az acr show --name myacr202109 --query loginServer --output table
+   # Associate a tag to the local image. You can use a different tag (say v2, v3, v4, ....) everytime you edit the underlying image. 
+   docker tag azure-vote-front:v1 myacr202109.azurecr.io/azure-vote-front:v1
+   # Now you will see myacr202109.azurecr.io/azure-vote-front:v1 if you run "docker images"
+   # Push the local registry to remote ACR
+   docker push myacr202109.azurecr.io/azure-vote-front:v1
+   # Verify if your image is up in the cloud.
+   az acr repository list --name myacr202109 --output table
+   # Associate the AKS cluster with the ACR
+   az aks update -n bayurzx-cluster -g deletenow --attach-acr myacr202109
+
+```
+# Now, deploy the images to the AKS cluster:
+``` bash
+   # Get the ACR login server name
+   az acr show --name myacr202109 --query loginServer --output table
+   # Make sure that the manifest file *azure-vote-all-in-one-redis.yaml*, has `myacr202109.azurecr.io/azure-vote-front:v1` as the image path.  
+   # Deploy the application. Run the command below from the parent directory where the *azure-vote-all-in-one-redis.yaml* file is present. 
+   kubectl apply -f azure-vote-all-in-one-redis.yaml
+   # Test the application at the External IP
+   # It will take a few minutes to come alive. 
+   kubectl get service azure-vote-front --watch
+   # You can also verify that the service is running like this
+   kubectl get service
+   # Check the status of each node
+   kubectl get pods
+   # Push your local changes to the remote Github repo, preferably in the Deploy_to_AKS branch
+
+```
+If `kubectl apply -f azure-vote-all-in-one-redis.yaml doesn't work` try running
+`az aks get-credentials --resource-group deletenow --name bayurzx-cluster` again
+
+## Autoscaling AKS Cluster
+- Once the deployment is completed, go to Insights for the cluster. Observe the state of the cluster. Note the number of nodes and the number of containers.
+
+- Create an alert in Azure Monitor to trigger when the number of pods increases over a certain threshold.
+
+- Create an autoscaler by using the following Azure CLI command
+``` bash
+# kubectl autoscale deployment azure-vote-front --cpu-percent=70 --min=1 --max=10
+kubectl autoscale deployment azure-vote-front --cpu-percent=70 --min=1 --max=4
+```
+  - *We will be using a max of four it seems my azure for students subscription has a restrictive policy for autoscaling*
+
+- Cause load on the system. After approximately 10 minutes, stop the load.
+
+>``` bash
+># This didn't cause that much load
+>for ((i=1;i<=100;i++)); do   curl -v --header "Connection: keep-alive" "20.185.72.112"; done
+>```
+  - we create a new deployment with a yaml file called [infinity-call.yaml](https://github.com/Bayurzx/udacity-project4/blob/master/infinity-call.yaml)
+    - it basically a [busybox](https://en.wikipedia.org/wiki/BusyBox) that runs a command to keep calling our website
+    - run `kubectl get deployments` to confirm its running
+    - This is automatically cause load on our cluster
+  - After 10 mins run `kubectl scale deploy deployments-simple-deployment-deployment --replicas=0` to scale it to zero this will stop the load
+    - Increase replicas to 1 to restart it
+
+- Observe the state of the cluster. Note the number of pods; it should have increased and should now be decreasing.
+  - You can observe continuously it with `kubectl get hpa -w`
+    - `HPA` means *Horizontal Pod Autoscaling* it only works for deployments set to autoscale `kubectl autoscale deployment`
+
+## Runbook
+- Create an Azure Automation Account
+
+- Create a Runbook (Python or Powershell)—either using a script or the UI—that will remedy a problem. It's your choice to mark any event as a "problem", such as average CPU% or memory utlliization crossing a certain threshold is a problem. In this case, think creatively, what you would like the Runbook to do after the average CPU% utlliization of the VMSS crosses a certain threshold. There are numerous options to choose from - vertical/horizontal scale the VMSS, start an existing VM, or any other remedy you choose.
+
+- In Azure automation, create an alert rule. An alert rule has the following components:
+
+  - Scope: The target resource you wish to monitor.
+  - Condition (or Event) that triggers the alert: For example, whenever the average CPU% utlliization of the target resource is greater than 5%, the automation alert should trigger.
+  - Action to be taken: Execute the Runbook to remedy the problem.
+  - Cause the problem, such as increase the load, to the flask app on the VM Scale Set.
+
+- Verify the problem is remedied via the Runbook.
+
