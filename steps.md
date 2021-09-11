@@ -23,6 +23,9 @@
 - Completed all todo's
 - Start the app with `python main.py`
 
+> Remember to comment out formatter because it prevents the trace logs form showing `# handler.setFormatter(logging.Formatter('%(traceId)s %(spanId)s %(message)s'))
+`
+
 ## Create an Azure VMSS
 A bash script setup-script.sh has been provided to automate the creation of the VMSS. You should not need to modify this script.
 ``` bash
@@ -118,7 +121,7 @@ az vmss list-instance-connection-info \
 ```
 
 - For the VM Scale Set, create an autoscaling rule based on metrics.
-*We will use a max count of 4 because if some policy defined for my subscription*
+*We will use a max count of 4 because of some policy defined for my subscription*
 ``` bash
 # To enable autoscale on a scale set, you first define an autoscale profile
 # It sets the default, and minimum, capacity of 2 VM instances, and a maximum of 10
