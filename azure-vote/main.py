@@ -27,7 +27,7 @@ from opencensus.ext.flask.flask_middleware import FlaskMiddleware
 logger = logging.getLogger(__name__)
 handler = AzureLogHandler(
     connection_string='InstrumentationKey=c5ad5e43-4a4f-44d4-a98b-4a9c02233559')
-# handler.setFormatter(logging.Formatter('%(traceId)s %(spanId)s %(message)s'))
+handler.setFormatter(logging.Formatter('%(message)s'))
 logger.addHandler(handler)
 
 # Logging custom Events
