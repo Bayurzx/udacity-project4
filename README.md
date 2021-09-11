@@ -34,6 +34,7 @@ In this project, you'll be tasked to do the following:
 ---
 
 # Before you start!!! 🚀🚀🚀 Checkout [my steps](./steps.md) ✨🎉
+# Note that I made advised changes (They look like this `📝 Advised Corrections 📝`)
 ---
 
 <details>
@@ -395,6 +396,7 @@ The script above will take a few minutes to create VMSS and related resources. O
    - The email you received from the alert when the pod count increased.
 
 ![1.5_Monitor_Alert_Pod_Incr.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/1.5_Monitor_Alert_Pod_Incr.jpg)
+📝 Advised Corrections 📝
 ![1.5_Monitor_Alert_Pod_Incr1.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/1.5_Monitor_Alert_Pod_Incr1.jpg)
 
 3. Screenshots for the Application Insights which include:
@@ -411,10 +413,12 @@ The script above will take a few minutes to create VMSS and related resources. O
 
    - The output of the `traces` query in Azure Log Analytics.
 
+📝 Advised Corrections 📝
 ![2.2_events2.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/2.2_events2.jpg)
 
    - The chart created from the output of the `traces` query.
 
+📝 Advised Corrections 📝
 ![2.2_events3.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/2.2_events3.jpg)
 
 1. Screenshots for the Autoscaling of the VM Scale Set which include:
@@ -454,6 +458,8 @@ The script above will take a few minutes to create VMSS and related resources. O
    - The summary of the alert which shows 'why did this alert fire?', timestamps, and the criterion in which it fired.
 
 ![4.2_Runbook_Alert1.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/4.2_Runbook_Alert1.jpg)
+
+📝 Advised Corrections 📝
 ![4.2_Runbook_Alert4.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/4.2_Runbook_Alert4.jpg)
 
 --- 
