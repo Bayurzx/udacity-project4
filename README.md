@@ -453,6 +453,7 @@ The script above will take a few minutes to create VMSS and related resources. O
    - The summary of the alert which shows 'why did this alert fire?', timestamps, and the criterion in which it fired.
 
 ![4.2_Runbook_Alert1.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/4.2_Runbook_Alert1.jpg)
+![4.2_Runbook_Alert4.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/4.2_Runbook_Alert4.jpg)
 
 --- 
 
