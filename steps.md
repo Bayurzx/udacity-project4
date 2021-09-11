@@ -35,6 +35,8 @@ A bash script setup-script.sh has been provided to automate the creation of the 
    # It uses cloud-init.txt file while running the command "az vmss create" available in the setup-script.sh  
    # The cloud-init.txt will install and start the nginx server (a load balancer) and a few Python packages. 
    chmod +x setup-script.sh # you can confirm that is executable <ls -l setup-script.sh>
+   # On windows some scripts do not work due to unix format. This removes `\r`
+   sed -i -e 's/\r$//' <myScript.sh>
    ./setup-script.sh
 ```
 The script above will take a few minutes to create VMSS and related resources
