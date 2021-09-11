@@ -213,33 +213,33 @@ redis-cli ping # returns pong
 > *Make sure to edit the `create-cluster.sh` for non-cloud-lab* 
 > Link to cluster is [here](https://github.com/Bayurzx/udacity-project4/blob/master/create-cluster.sh)
 
-# create a Container Registry in Azure to store the image, and AKS can later pull them during deployment to the AKS cluster. Feel free to change the ACR name in place of myacr202109 below.
+# create a Container Registry in Azure to store the image, and AKS can later pull them during deployment to the AKS cluster. Feel free to change the ACR name in place of myacr202109s below.
 ``` bash
    # Assuming the deletenow resource group is still available with you
    # ACR name should not have upper case letter
-   az acr create --resource-group deletenow --name myacr202109 --sku Basic
+   az acr create --resource-group deletenow --name myacr202109s --sku Basic
    # Log in to the ACR
-   az acr login --name myacr202109
+   az acr login --name myacr202109s
    # Get the ACR login server name
    # To use the azure-vote-front container image with ACR, the image needs to be tagged with the login server address of your registry. 
    # Find the login server address of your registry
-   az acr show --name myacr202109 --query loginServer --output table
+   az acr show --name myacr202109s --query loginServer --output table
    # Associate a tag to the local image. You can use a different tag (say v2, v3, v4, ....) everytime you edit the underlying image. 
-   docker tag azure-vote-front:v1 myacr202109.azurecr.io/azure-vote-front:v1
-   # Now you will see myacr202109.azurecr.io/azure-vote-front:v1 if you run "docker images"
+   docker tag azure-vote-front:v1 myacr202109s.azurecr.io/azure-vote-front:v1
+   # Now you will see myacr202109s.azurecr.io/azure-vote-front:v1 if you run "docker images"
    # Push the local registry to remote ACR
-   docker push myacr202109.azurecr.io/azure-vote-front:v1
+   docker push myacr202109s.azurecr.io/azure-vote-front:v1
    # Verify if your image is up in the cloud.
-   az acr repository list --name myacr202109 --output table
+   az acr repository list --name myacr202109s --output table
    # Associate the AKS cluster with the ACR
-   az aks update -n bayurzx-cluster -g deletenow --attach-acr myacr202109
+   az aks update -n bayurzx-cluster -g deletenow --attach-acr myacr202109s
 
 ```
 # Now, deploy the images to the AKS cluster:
 ``` bash
    # Get the ACR login server name
-   az acr show --name myacr202109 --query loginServer --output table
-   # Make sure that the manifest file *azure-vote-all-in-one-redis.yaml*, has `myacr202109.azurecr.io/azure-vote-front:v1` as the image path.  
+   az acr show --name myacr202109s --query loginServer --output table
+   # Make sure that the manifest file *azure-vote-all-in-one-redis.yaml*, has `myacr202109s.azurecr.io/azure-vote-front:v1` as the image path.  
    # Deploy the application. Run the command below from the parent directory where the *azure-vote-all-in-one-redis.yaml* file is present. 
    kubectl apply -f azure-vote-all-in-one-redis.yaml
    # Test the application at the External IP
@@ -273,10 +273,14 @@ kubectl autoscale deployment azure-vote-front --cpu-percent=70 --min=1 --max=4
 ># This didn't cause that much load, so ignore!!! 
 >for ((i=1;i<=100;i++)); do   curl -v --header "Connection: keep-alive" "20.185.72.112"; done
 >```
-  - we create a new deployment with a yaml file called [infinity-call.yaml](https://github.com/Bayurzx/udacity-project4/blob/master/infinity-call.yaml)
-    - it basically a [busybox](https://en.wikipedia.org/wiki/BusyBox) that runs a command to keep calling our website
-    - run `kubectl get deployments` to confirm its running
-    - This is automatically cause load on our cluster
+  - we create a new deployment with a yaml file called [infinity-call.yaml](https://github.com/Bayurzx/udacity-project4/blob/master/infinity-call.yaml) 
+``` bash
+kubectl apply -f infinity-call.yaml
+```
+
+  - it basically a [busybox](https://en.wikipedia.org/wiki/BusyBox) that runs a command to keep calling our website
+  - run `kubectl get deployments` to confirm its running
+  - This is automatically cause load on our cluster
   - After 10 mins run `kubectl scale deploy deployments-simple-deployment-deployment --replicas=0` to scale it to zero this will stop the load
     - Increase replicas to 1 to restart it
 

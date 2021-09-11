@@ -7,9 +7,9 @@ clusterName="bayurzx-cluster"
 # Install aks cli
 echo "Installing AKS CLI "
 
-az aks install-cli
+# az aks install-cli
 
-echo "AKS CLI installed"
+echo "AKS CLI was already installed"
 
 # Create AKS cluster
 echo "Step 1 - Creating AKS cluster $clusterName"

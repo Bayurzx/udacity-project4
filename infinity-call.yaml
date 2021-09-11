@@ -18,4 +18,4 @@ spec:
           command:
             - /bin/sh
             - -c
-            - "while true; do wget -q -O- http://20.185.72.112/; done"
+            - "while true; do wget -q -O- http://52.149.232.220/; done"

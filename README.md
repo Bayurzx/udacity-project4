@@ -395,6 +395,7 @@ The script above will take a few minutes to create VMSS and related resources. O
    - The email you received from the alert when the pod count increased.
 
 ![1.5_Monitor_Alert_Pod_Incr.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/1.5_Monitor_Alert_Pod_Incr.jpg)
+![1.5_Monitor_Alert_Pod_Incr1.jpg](https://raw.githubusercontent.com/Bayurzx/udacity-project4/Deploy_to_AKS/pics/1.5_Monitor_Alert_Pod_Incr1.jpg)
 
 3. Screenshots for the Application Insights which include:
    **Note**: Place all screenshots for Application Insights in the `submission-screenshots/application-insights` directory
