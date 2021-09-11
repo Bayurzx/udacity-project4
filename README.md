@@ -34,7 +34,7 @@ In this project, you'll be tasked to do the following:
 ---
 
 # Before you start!!! 🚀🚀🚀 Checkout [my steps](./steps.md) ✨🎉
-# Note that I made advised changes (They look like this `📝 Advised Corrections 📝`)
+# Note that I made advised changes (They look like this <br /> `📝 Advised Corrections 📝`)
 ---
 
 <details>
