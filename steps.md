@@ -35,6 +35,8 @@ A bash script setup-script.sh has been provided to automate the creation of the 
    # It uses cloud-init.txt file while running the command "az vmss create" available in the setup-script.sh  
    # The cloud-init.txt will install and start the nginx server (a load balancer) and a few Python packages. 
    chmod +x setup-script.sh # you can confirm that is executable <ls -l setup-script.sh>
+   # On windows some scripts do not work due to unix format. This removes `\r`
+   sed -i -e 's/\r$//' <myScript.sh>
    ./setup-script.sh
 ```
 The script above will take a few minutes to create VMSS and related resources
@@ -43,6 +45,8 @@ The script above will take a few minutes to create VMSS and related resources
 - Create an Application Insights resource. It will automatically create a Log Analytics workspace in addition.
 
 - Enable Application Insights monitoring for the VM Scale Set. Make sure to choose the same Log Analytics workspace that you've created in the step above. The Insights deployment will take 10-15 minutes.
+  - Simply search vmss and scroll down by the left to click insight
+  - Click enable and select the log analytics resource you just created 
 
 - To collect the Logs and Telemetry data, add the reference Application Insights to main.py and specify the instrumentation key. You will need to provide details about the Logging, Metrics, Tracing, and Requests. In addition, add custom event telemetry when 'Dogs' is clicked and when 'Cats' is clicked. Refer to the TODO comments in the main.py file for more details.
 
@@ -67,7 +71,7 @@ git push --set-upstream origin Deploy_to_VMSS
       --name bayurzx-vmss 
    # The following command will connect you to your VM. 
    # Replace `[public-ip]` with the public-ip address of your VMSS.
-   ssh -p 50000 bayurzx@52.152.143.39
+   ssh -p 50000 bayurzx@52.170.197.202
 ```
 
 - Once you log in to one of the VMSS instances, deploy the application manually:
@@ -150,7 +154,7 @@ az monitor autoscale rule create \
 **Generate CPU load on scale set**
 - Trigger the conditions for the rule, causing an autoscaling event.
 ``` bash
-ssh bayurzx@52.152.143.39 -p 50000
+ssh bayurzx@52.170.197.202 -p 50000
 sudo apt-get update
 # install stress and monitor with top or htop
 sudo apt-get -y install stress
@@ -160,7 +164,7 @@ Ctrl-c
 exit
 
 # do the same thing for second vm
-ssh bayurzx@52.152.143.39 -p 50001
+ssh bayurzx@52.170.197.202 -p 50001
 sudo apt-get -y install stress
 sudo stress --cpu 10 --timeout 420 &
 

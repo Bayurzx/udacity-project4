@@ -22,12 +22,12 @@ storageType="Standard_LRS"
 # Cloud Lab users can comment this command and 
 # use the existing Resource group name, such as, resourceGroup="cloud-demo-153430" 
 # echo "STEP 0 - Creating resource group $resourceGroup..."
-echo "STEP 0 - Already got a resource group: $resourceGroup..."
+echo "STEP 0 - Creating a resource group: $resourceGroup..."
 
-# az group create \
-# --name $resourceGroup \
-# --location $location \
-# --verbose
+az group create \
+--name $resourceGroup \
+--location $location \
+--verbose
 
 az group show -n deletenow
 
